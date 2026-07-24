@@ -147,6 +147,9 @@ func (p *SidecarProvider) Resources(ctx context.Context) []func() resource.Resou
 		agent.NewAgentResource,
 		agent.NewAgentTaskResource,
 		repo.NewServiceUserResource,
+		classification.NewClassifierResource,
+		classification.NewClassifierCollectionResource,
+		classification.NewCollectionClassifierResource,
 	}
 }
 
