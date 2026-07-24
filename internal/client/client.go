@@ -19,11 +19,12 @@ import (
 )
 
 type Client struct {
-	httpClient  *http.Client
-	baseURL     string
-	externalURL string // URL for external API calls
-	sidecarURL  string // URL for sidecar API calls
-	auth        string
+	httpClient        *http.Client
+	baseURL           string
+	externalURL       string // URL for external API calls
+	sidecarURL        string // URL for sidecar API calls
+	classificationURL string // URL for classification API calls
+	auth              string
 }
 
 func NewClient(orgID, apiKey, secret, baseURL string) (*Client, error) {
@@ -36,13 +37,15 @@ func NewClient(orgID, apiKey, secret, baseURL string) (*Client, error) {
 	if strings.Contains(baseURL, "altrnet") {
 		externalURL := strings.Replace(baseURL, "altrnet", "api", 1) + "/v1"
 		sidecarURL := strings.Replace(baseURL, "altrnet", "sc-control", 1) + "/v1"
+		classificationURL := strings.Replace(baseURL, "altrnet", "classification", 1) + "/v1"
 
 		return &Client{
-			httpClient:  &http.Client{Timeout: 30 * time.Second},
-			baseURL:     baseURL,
-			externalURL: externalURL, // For altrnet, external and sidecar URLs
-			sidecarURL:  sidecarURL,
-			auth:        auth,
+			httpClient:        &http.Client{Timeout: 30 * time.Second},
+			baseURL:           baseURL,
+			externalURL:       externalURL, // For altrnet, external and sidecar URLs
+			sidecarURL:        sidecarURL,
+			classificationURL: classificationURL,
+			auth:              auth,
 		}, nil
 	} else {
 		return nil, errors.New("base URL must contain 'altrnet' for altrnet API")
@@ -59,6 +62,8 @@ func (c *Client) makeRequest(method, endpoint string, body interface{}, apiGatew
 		url = c.externalURL + endpoint
 	case "sidecar":
 		url = c.sidecarURL + endpoint
+	case "classification":
+		url = c.classificationURL + endpoint
 	default:
 		return nil, fmt.Errorf("unknown API gateway: %s", apiGateway)
 	}
