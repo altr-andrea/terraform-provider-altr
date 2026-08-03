@@ -266,3 +266,31 @@ type UpdateServiceUserInput struct {
 	EnvironmentVariable *EnvironmentVariable `json:"environment_variable,omitempty"`
 	SecretFile          *SecretFile          `json:"secret_file,omitempty"`
 }
+
+// DAM alert rule structures
+type DamAlertRule struct {
+	RuleID          string          `json:"rule_id"`
+	Name            string          `json:"name"`
+	Description     string          `json:"description,omitempty"`
+	Severity        string          `json:"severity"`
+	Enabled         bool            `json:"enabled"`
+	DataSourceScope string          `json:"data_source_scope"`
+	RuleType        string          `json:"rule_type"`
+	EmailRecipients []string        `json:"email_recipients,omitempty"`
+	FilterTree      json.RawMessage `json:"filter_tree,omitempty"`
+}
+
+type CreateDamAlertRuleInput struct {
+	Name            string          `json:"name"`
+	Description     string          `json:"description,omitempty"`
+	Severity        string          `json:"severity"`
+	Enabled         bool            `json:"enabled"`
+	DataSourceScope string          `json:"data_source_scope"`
+	RuleType        string          `json:"rule_type"`
+	EmailRecipients []string        `json:"email_recipients,omitempty"`
+	FilterTree      json.RawMessage `json:"filter_tree,omitempty"`
+}
+
+type ListDamAlertRulesResponse struct {
+	Items []DamAlertRule `json:"items"`
+}

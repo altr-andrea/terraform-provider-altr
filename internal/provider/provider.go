@@ -9,6 +9,7 @@ import (
 
 	"github.com/altrsoftware/terraform-provider-altr/internal/client"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/agent"
+	"github.com/altrsoftware/terraform-provider-altr/internal/service/alerting"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/policy"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/repo"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/sidecar"
@@ -146,6 +147,7 @@ func (p *SidecarProvider) Resources(ctx context.Context) []func() resource.Resou
 		agent.NewAgentResource,
 		agent.NewAgentTaskResource,
 		repo.NewServiceUserResource,
+		alerting.NewDamAlertRuleResource,
 	}
 }
 
