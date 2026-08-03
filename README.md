@@ -121,43 +121,42 @@ For local development, you can use Terraform's development overrides:
 
 ## Running Tests
 
+Common tasks are make targets, listed in the `GNUmakefile`. CI builds, lints, and unit-tests every pull request, and checks that `docs/` is up to date. Acceptance tests are not run in CI; they create real resources against a live org, so run them locally with `make testacc`.
+
 ### Unit Tests
 
 Run the unit tests:
+```bash
+make test
 ```
-bash
-go test ./...
-```
+
 ### Acceptance Tests
 
-Run acceptance tests (requires valid credentials):
+Acceptance tests use the standard [terraform-plugin-testing](https://github.com/hashicorp/terraform-plugin-testing) framework and create real resources against a live org. Requires `ALTR_ORG_ID`, `ALTR_API_KEY`, `ALTR_SECRET`, and `ALTR_BASE_URL`:
+```bash
+make testacc
 ```
-bash
-TF_ACC=1 go test ./... -v
+To run a subset, pass standard `go test` arguments:
+```bash
+TF_ACC=1 go test ./internal/service/repo/ -v -run TestAccRepo
 ```
 
 ### Generating Documentation
 
 Generate terraform documentation:
-```
-bash
-cd ./tools
-go generate
+```bash
+make generate
 ```
 
 ### Linting and Formatting
 
 Ensure code quality:
-```
-bash
+```bash
 # Format code
-go fmt ./...
+make fmt
 
-# Run static analysis
-go vet ./...
-
-# Run golangci-lint (if installed)
-golangci-lint run
+# Run golangci-lint (configuration in .golangci.yml)
+make lint
 ```
 
 ### Development Process
@@ -166,7 +165,7 @@ golangci-lint run
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Add tests for your changes
-5. Ensure all tests pass (`go test ./...`)
+5. Ensure all tests pass (`make test`)
 6. Run linting and formatting tools
 7. Commit your changes (`git commit -m 'Add amazing feature'`)
 8. Push to the branch (`git push origin feature/amazing-feature`)

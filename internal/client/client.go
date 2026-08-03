@@ -89,11 +89,16 @@ func (c *Client) makeRequest(method, endpoint string, body interface{}, apiGatew
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
+	// Authorization is base64 of the API key and secret, so it must never
+	// reach a log.
+	safeHeaders := req.Header.Clone()
+	safeHeaders.Set("Authorization", "(redacted)")
+
 	tflog.Trace(context.Background(), "Making request", map[string]interface{}{
 		"url":     url,
 		"method":  method,
 		"body":    body,
-		"headers": req.Header,
+		"headers": safeHeaders,
 	})
 
 	return c.httpClient.Do(req)

@@ -1,0 +1,33 @@
+# Copyright (c) ALTR Solutions, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+version: "2"
+
+linters:
+  default: none
+  enable:
+    - copyloopvar
+    - durationcheck
+    - errcheck
+    # TODO: forcetypeassert and godot. 111 existing hits to clean up first.
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nilerr
+    - predeclared
+    - staticcheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+  exclusions:
+    rules:
+      # Test helpers keep params that every caller currently sets the same.
+      - path: '_test\.go'
+        linters:
+          - unparam
+
+formatters:
+  enable:
+    - gofmt
