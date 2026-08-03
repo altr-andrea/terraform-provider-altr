@@ -7,3 +7,11 @@ resource "altr_repo" "example" {
   hostname = "example.com"
   port     = 1521
 }
+
+# MongoDB (requires sidecar >= 1.59.0)
+resource "altr_repo" "mongo" {
+  name     = "mongo_db"
+  type     = "MongoDB"
+  hostname = "mongo-db.example.com"
+  port     = 27017
+}

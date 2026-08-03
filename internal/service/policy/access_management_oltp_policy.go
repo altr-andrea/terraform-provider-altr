@@ -165,7 +165,7 @@ func (d *AccessManagementOLTPPolicyResource) Schema(ctx context.Context, req res
 				},
 			},
 			"database_type_name": schema.StringAttribute{
-				Description: "Database type name for the policy.",
+				Description: "Database type name for the policy. This API takes its own type list, which does not yet include MongoDB.",
 				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

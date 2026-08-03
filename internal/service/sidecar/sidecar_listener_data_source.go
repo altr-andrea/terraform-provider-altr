@@ -61,7 +61,7 @@ func (d *SidecarListenerDataSource) Schema(ctx context.Context, req datasource.S
 				},
 			},
 			"database_type": schema.StringAttribute{
-				Description: "Type of database (e.g., Oracle, etc.).",
+				Description: "Type of database the listener accepts. One of: " + service.OltpDatabaseTypesList() + service.MongoDBVersionNote + ".",
 				Computed:    true,
 			},
 			"advertised_version": schema.StringAttribute{

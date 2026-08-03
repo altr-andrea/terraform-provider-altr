@@ -79,7 +79,7 @@ func (r *RepoResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				},
 			},
 			"type": schema.StringAttribute{
-				Description: "Type of the repository (e.g., Oracle).",
+				Description: "Type of the repository. One of: " + service.OltpDatabaseTypesList() + service.MongoDBVersionNote + ".",
 				Required:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOf(service.OltpDatabaseTypes...),

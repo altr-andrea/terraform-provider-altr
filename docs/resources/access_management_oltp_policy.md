@@ -70,7 +70,7 @@ resource "altr_access_management_oltp_policy" "example" {
 
 - `case_sensitivity` (String) Case sensitivity for the policy.
 - `database_type` (Number) Database type ID for the policy.
-- `database_type_name` (String) Database type name for the policy.
+- `database_type_name` (String) Database type name for the policy. This API takes its own type list, which does not yet include MongoDB.
 - `name` (String) Name of the OLTP access management policy.
 - `repo_name` (String) The name of the repository this policy belongs to.
 - `rules` (Attributes List) List of rules for the OLTP access management policy. (see [below for nested schema](#nestedatt--rules))

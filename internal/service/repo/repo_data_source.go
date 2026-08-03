@@ -66,7 +66,7 @@ func (d *RepoDataSource) Schema(ctx context.Context, req datasource.SchemaReques
 				Computed:    true,
 			},
 			"type": schema.StringAttribute{
-				Description: "Type of the repository (e.g., Oracle, etc.).",
+				Description: "Type of the repository. One of: " + service.OltpDatabaseTypesList() + service.MongoDBVersionNote + ".",
 				Computed:    true,
 			},
 			"hostname": schema.StringAttribute{

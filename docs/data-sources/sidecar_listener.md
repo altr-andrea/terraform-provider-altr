@@ -33,4 +33,4 @@ data "altr_sidecar_listener" "example_9000" {
 ### Read-Only
 
 - `advertised_version` (String) Advertised version of the database.
-- `database_type` (String) Type of database (e.g., Oracle, etc.).
+- `database_type` (String) Type of database the listener accepts. One of: Oracle, MSSQL, MySQL, Postgres, MongoDB (MongoDB requires sidecar >= 1.59.0).

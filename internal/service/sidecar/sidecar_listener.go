@@ -85,7 +85,7 @@ func (r *SidecarListenerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"database_type": schema.StringAttribute{
-				Description: "Type of database (e.g., Oracle, etc.).",
+				Description: "Type of database the listener accepts. One of: " + service.OltpDatabaseTypesList() + service.MongoDBVersionNote + ".",
 				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
