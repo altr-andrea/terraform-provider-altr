@@ -32,12 +32,19 @@ func (c *Client) GetRepoUser(repoName, username string) (*RepoUser, error) {
 	}
 
 	if resp.StatusCode == http.StatusNotFound {
+		_ = resp.Body.Close()
+
 		return nil, nil
 	}
 
 	var repoUser RepoUser
 	if err := handleAPIResponse(resp, &repoUser); err != nil {
 		return nil, fmt.Errorf("failed to get repo user: %w", err)
+	}
+
+	// The API returns 2xx with an empty object when the user doesn't exist.
+	if repoUser.Username == "" {
+		return nil, nil
 	}
 
 	return &repoUser, nil
