@@ -9,6 +9,7 @@ import (
 
 	"github.com/altrsoftware/terraform-provider-altr/internal/client"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/agent"
+	"github.com/altrsoftware/terraform-provider-altr/internal/service/classification"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/policy"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/repo"
 	"github.com/altrsoftware/terraform-provider-altr/internal/service/sidecar"
@@ -162,6 +163,8 @@ func (p *SidecarProvider) DataSources(ctx context.Context) []func() datasource.D
 		policy.NewImpersonationPolicyDataSource,
 		agent.NewAgentDataSource,
 		agent.NewAgentTaskDataSource,
+		classification.NewClassifierDataSource,
+		classification.NewClassifierCollectionDataSource,
 	}
 }
 
